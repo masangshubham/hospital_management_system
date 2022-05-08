@@ -1,0 +1,172 @@
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.7.36 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| ass1               |
+| employee           |
+| i2it               |
+| mysql              |
+| performance_schema |
+| practicals         |
+| practice           |
+| student            |
+| sys                |
++--------------------+
+10 rows in set (0.02 sec)
+
+mysql> create database pbl;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| ass1               |
+| employee           |
+| i2it               |
+| mysql              |
+| pbl                |
+| performance_schema |
+| practicals         |
+| practice           |
+| student            |
+| sys                |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> use pbl;
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create table appointment(id int(10) not null,doctorSpecialization varchar(20) not null, doctorId int(10) not null, appointmnetDate varchar(20) not null)engine=innodb;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into appointment values(1,'dentist',101,'2022-05-09');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into appointment values(2,'homeopath',102,'2022-05-04');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from appointment;
++----+----------------------+----------+-----------------+
+| id | doctorSpecialization | doctorId | appointmnetDate |
++----+----------------------+----------+-----------------+
+|  1 | dentist              |      101 | 2022-05-09      |
+|  2 | homeopath            |      102 | 2022-05-04      |
++----+----------------------+----------+-----------------+
+2 rows in set (0.00 sec)
+
+mysql> alter table appointment
+    -> add primary key (id);
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc appointment;
++----------------------+-------------+------+-----+---------+-------+
+| Field                | Type        | Null | Key | Default | Extra |
++----------------------+-------------+------+-----+---------+-------+
+| id                   | int(10)     | NO   | PRI | NULL    |       |
+| doctorSpecialization | varchar(20) | NO   |     | NULL    |       |
+| doctorId             | int(10)     | NO   |     | NULL    |       |
+| appointmnetDate      | varchar(20) | NO   |     | NULL    |       |
++----------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> create table doctors(id int(10) not null,specilization varchar(20) not null,doctorName varchar(20) not null,docFees int(10) not null);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into doctors values(101,'dentist','shubham',500);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into doctors values(102,'homeopath','sairaj',300);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into doctors values(103,'ayurveda','vijay',100);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> alter table doctors
+    -> add primary key (id);
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from doctors;
++-----+---------------+------------+---------+
+| id  | specilization | doctorName | docFees |
++-----+---------------+------------+---------+
+| 101 | dentist       | shubham    |     500 |
+| 102 | homeopath     | sairaj     |     300 |
+| 103 | ayurveda      | vijay      |     100 |
++-----+---------------+------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> create table patient(pid int(10) not null,address varchar(20) not null,age int(3) not null);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into patient values(201,'pune',25);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into patient values(202,'mumbai',40);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into patient values(203,'mumbai',50);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> alter table patient
+    -> add primary key (pid);
+Query OK, 3 rows affected (0.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from patient;
++-----+---------+-----+
+| pid | address | age |
++-----+---------+-----+
+| 201 | pune    |  25 |
+| 202 | mumbai  |  40 |
+| 203 | mumbai  |  50 |
++-----+---------+-----+
+3 rows in set (0.01 sec)
+
+mysql> create table rooms(rno int(5) not null,rtype varchar(20) not null,pid int(10) not null);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into rooms values(51,'AC',201);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into rooms values(52,'AC',202);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into rooms values(53,'NonAC',203);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> alter table rooms
+    -> add primary key (rno);
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from rooms;
++-----+-------+-----+
+| rno | rtype | pid |
++-----+-------+-----+
+|  51 | AC    | 201 |
+|  52 | AC    | 202 |
+|  53 | NonAC | 203 |
++-----+-------+-----+
+3 rows in set (0.01 sec)
+
+mysql>
